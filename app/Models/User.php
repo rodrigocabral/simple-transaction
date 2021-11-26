@@ -11,6 +11,9 @@ use Laravel\Lumen\Auth\Authorizable;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
+    public const USER_COMMON = 1;
+    public const USER_COMPANY = 2;
+
     use Authenticatable, Authorizable, HasFactory;
 
     /**
@@ -30,4 +33,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function wallet()
+    {
+        $this->belongsTo(Wallet::class);
+    }
+
+    public function isCommonUser(): bool
+    {
+        return $this->type === self::USER_COMMON;
+    }
 }
