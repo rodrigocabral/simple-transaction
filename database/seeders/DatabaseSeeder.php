@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call('UsersTableSeeder');
+        User::query()->create([
+                'name' => 'Common User',
+                'document_id' => '79040097062',
+                'email' => 'common@app.com',
+                'password' => '202cb962ac59075b964b07152d234b70',
+                'type' => 1
+            ]);
+
+        User::query()->create([
+            'name' => 'Second Common User',
+            'document_id' => '81127336002',
+            'email' => 'common2@app.com',
+            'password' => '202cb962ac59075b964b07152d234b70',
+            'type' => 1
+        ]);
+
+        User::query()->create([
+            'name' => 'Company User',
+            'document_id' => '45738524000112',
+            'email' => 'user@company.com',
+            'password' => '202cb962ac59075b964b07152d234b70',
+            'type' => 2
+        ]);
     }
 }
