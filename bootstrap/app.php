@@ -48,6 +48,25 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+$app->singleton(
+    \GuzzleHttp\ClientInterface::class,
+    \GuzzleHttp\Client::class
+);
+
+$app->singleton(
+    \App\Repositories\Contracts\IUserRepository::class,
+    \App\Repositories\Implementations\Eloquent\UserRepository::class
+);
+
+$app->singleton(
+    \App\Repositories\Contracts\IWalletRepository::class,
+    \App\Repositories\Implementations\Eloquent\WalletRepository::class
+);
+$app->singleton(
+    \App\Repositories\Contracts\ITransactionRepository::class,
+    \App\Repositories\Implementations\Eloquent\TransactionRepository::class
+);
+
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
