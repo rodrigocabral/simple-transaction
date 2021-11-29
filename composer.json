@@ -23,8 +23,11 @@
         }
     },
     "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        },
         "classmap": [
-            "tests/"
+            "tests"
         ]
     },
     "config": {
