@@ -36,11 +36,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function wallet()
     {
-        $this->belongsTo(Wallet::class);
-    }
-
-    public function isCommonUser(): bool
-    {
-        return $this->type === self::USER_COMMON;
+        return $this->belongsTo(Wallet::class, 'id', 'user_id');
     }
 }

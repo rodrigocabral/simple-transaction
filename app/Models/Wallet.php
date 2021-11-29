@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wallet extends Model
 {
-    protected $fillable = ['balance', 'user_id'];
+    protected $fillable = ['funds', 'user_id'];
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->hasOne(User::class, 'user_id', 'id');
+    }
+
+    public function hasFunds(): bool
+    {
+        return $this->funds > 0;
     }
 }
