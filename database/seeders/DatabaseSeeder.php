@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -36,6 +37,20 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@company.com',
             'password' => '202cb962ac59075b964b07152d234b70',
             'type' => 2
+        ]);
+
+        Wallet::query()->create([
+            'user_id' => 1,
+            'funds' => 100,
+        ]);
+
+        Wallet::query()->create([
+            'user_id' => 2,
+        ]);
+
+        Wallet::query()->create([
+            'user_id' => 3,
+            'funds' => 400,
         ]);
     }
 }
