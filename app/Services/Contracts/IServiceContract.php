@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Contracts;
 
-interface IServiceBase
+interface IServiceContract
 {
     public function execute(array $data): array;
 }
