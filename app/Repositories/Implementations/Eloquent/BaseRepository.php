@@ -4,40 +4,40 @@ namespace App\Repositories\Implementations\Eloquent;
 
 class BaseRepository
 {
-    protected object $obj;
+    public object $model;
 
-    protected function __construct(object $obj)
+    protected function __construct(object $model)
     {
-        $this->obj = $obj;
+        $this->model = $model;
     }
 
     public function all(): object
     {
-        return $this->obj->all();
+        return $this->model->all();
     }
 
     public function find(int $id): object
     {
-        return $this->obj->find($id);
+        return $this->model->find($id);
     }
 
     public function findByColumn(string $column, $value): object
     {
-        return $this->obj->where($column, $value)->get();
+        return $this->model->where($column, $value)->get();
     }
 
-    public function save(array $attributes): bool
+    public function save(array $attributes): object
     {
-        return $this->obj->insert($attributes);
+        return $this->model->create($attributes);
     }
 
     public function update(int $id, array $attributes): bool
     {
-        return $this->obj->find($id)->update($attributes);
+        return $this->model->where('id', $id)->update($attributes);
     }
 
     public function findOneByColumn(string $column, $value): object
     {
-        return $this->obj->where($column, $value)->get()->first();
+        return $this->model->where($column, $value)->get()->first();
     }
 }
