@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\TransactionService;
+use App\Services\Transactions\TransactionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -24,11 +24,9 @@ class TransactionController extends BaseController
         $value = $request->get('value');
 
         try {
-            DB::begintransaction();
-            $this->service->execute([$payer_id, $payee_id, $value]);
-            DB::commit();
+            $this->service->create([$payer_id, $payee_id, $value]);
         } catch (ValidationException $ex) {
-            DB::rollBack();
+
             return response()->json(['error' => $ex->validator->errors()->first()], 400);
         }
 
