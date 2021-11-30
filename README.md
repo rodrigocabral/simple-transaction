@@ -1,24 +1,60 @@
-# Lumen PHP Framework
+# Simple Transactions
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+The main objective of this project is simulate a payment transaction. 
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+### Dependencies
 
-## Official Documentation
+#### Docker
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+- [Docker](https://docs.docker.com/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [Git](https://git-scm.com/downloads)
 
-## Contributing
+#### Server
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- [PHP](http://php.net/) 7.4
+- [Composer](https://getcomposer.org/)
+- [Postgres](https://www.postgresql.org/)
+- [Nginx](https://www.nginx.com/)
 
-## Security Vulnerabilities
+## Install
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+- Clone this repository: `git clone git@github.com:rodrigocabral/simple-transaction.git && cd simple-transaction`
+- Build containers: `docker-compose up -d --build`
+- Enter into container: `docker-compose exec php sh`
+- Install dependencies: `docker-compose exec php composer install`
+- Run migrations: `docker-compose exec php artisan migrate`
+- Run seed: `docker-compose exec php artisan db:seed`
 
-## License
+### Database configurations
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```dotenv
+DB_CONNECTION=pgsql
+DB_HOST=postgres
+DB_PORT=5432
+DB_DATABASE=transactions
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+```
+
+### Queue configuration
+```dotenv
+QUEUE_CONNECTION=database
+```
+
+### Tests
+
+```shell
+docker-compose exec php vendor/bin/phpunit
+```
+
+### Payload
+
+POST http://localhost/api/transaction
+```json
+{
+    "value" : 100.00,
+    "payer" : 4,
+    "payee" : 15
+}
+```
