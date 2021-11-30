@@ -1,19 +1,21 @@
 <?php
 namespace Tests\Api;
 
-use Laravel\Lumen\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Queue;
+use Laravel\Lumen\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use Tests\Traits\CreateSimpleWallets;
 
 class TransactionTest extends TestCase
 {
     use CreateSimpleWallets;
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->createWallets();
+        Queue::fake();
     }
 
     public function testPostNewTransaction()
