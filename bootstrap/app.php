@@ -49,11 +49,6 @@ $app->singleton(
 );
 
 $app->singleton(
-    \GuzzleHttp\ClientInterface::class,
-    \GuzzleHttp\Client::class
-);
-
-$app->singleton(
     \App\Repositories\Contracts\IUserRepository::class,
     \App\Repositories\Implementations\Eloquent\UserRepository::class
 );
@@ -66,7 +61,14 @@ $app->singleton(
     \App\Repositories\Contracts\ITransactionRepository::class,
     \App\Repositories\Implementations\Eloquent\TransactionRepository::class
 );
-
+$app->singleton(
+    \App\Services\Contracts\IAuthorizationServiceContract::class,
+    \App\Services\Authorizations\AuthorizationService::class
+);
+$app->singleton(
+    \App\Services\Contracts\INotificationServiceContract::class,
+    \App\Services\Notifications\NotificationService::class
+);
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
@@ -79,6 +81,7 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('queue');
 
 /*
 |--------------------------------------------------------------------------
@@ -112,7 +115,7 @@ $app->configure('app');
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
