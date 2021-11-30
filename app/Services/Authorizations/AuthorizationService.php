@@ -13,7 +13,7 @@ class AuthorizationService implements IAuthorizationServiceContract
     {
         try {
             $response = Http::get($this->apiUrl);
-            return $response['message'] === 'Success';
+            return $response['message'] === 'Autorizado';
         } catch (\Exception $ex) {
             return false;
         }
