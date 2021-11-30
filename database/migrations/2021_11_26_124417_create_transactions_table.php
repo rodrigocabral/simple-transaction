@@ -18,6 +18,9 @@ class CreateTransactionsTable extends Migration
             $table->integer('payer')->nullable(false);
             $table->integer('payee')->nullable(false);
             $table->decimal('value')->nullable(false);
+            $table->boolean('notified')->default(false);
+            $table->boolean('authorized')->default(false);
+            $table->boolean('confirmed')->default(false);
             $table->timestamps();
 
             $table->foreign('payer')
