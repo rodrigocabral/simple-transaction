@@ -56,6 +56,7 @@ class TransactionService
     public function confirm(array $data): void
     {
         [$payer_id, $payee_id, $value, $transaction_id] = $data;
+        $this->validate($payer_id, $payee_id, $value);
 
         try {
             DB::beginTransaction();
